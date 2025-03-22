@@ -1,0 +1,29 @@
+@startuml
+!theme materia-outline
+
+'Classes:
+'-------------
+
+class Twitter {
++ agregarUsuario()
++ eliminarUsuario()
+}
+
+class Usuario {
+- screenName: String
++ crearTweet()
++ hacerRetweet()
+- eliminarMisTweets()
+}
+
+class Tweet {
+- texto: String
+}
+
+'Associations:
+'-------------
+
+"Twitter" "0" --> "*" "Usuario" :usuarios
+"Usuario" "0" --> "*" "Tweet" :tweets
+"Tweet" "0" --> "1" "Tweet" :retweet
+@enduml
