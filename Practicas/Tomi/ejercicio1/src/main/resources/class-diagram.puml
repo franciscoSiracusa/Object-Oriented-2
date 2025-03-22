@@ -1,0 +1,20 @@
+@startuml
+class Twitter {
+  +registerUser(user: User): boolean
+}
+
+class Tweet {
+  -text: String
+}
+
+class User {
+  -screenName: String
+
+  +postTweet(text: String): boolean
+}
+
+Twitter *-- "*" User: "users"
+Tweet -- Tweet: "retweet"
+Tweet -- Tweet: "originTweet"
+User *-- "*" Tweet: tweets
+@enduml
