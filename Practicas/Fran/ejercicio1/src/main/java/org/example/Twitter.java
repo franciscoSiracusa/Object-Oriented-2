@@ -23,7 +23,7 @@ public class Twitter {
     public void eliminarUsuario(Usuario usuarioEliminado){
         boolean isUsuarioEliminadoPresente =usuarios.stream().anyMatch(x -> x.equals(usuarioEliminado));
         if (isUsuarioEliminadoPresente) {
-
+            usuarios.remove(usuarioEliminado);
         }
     }
 }

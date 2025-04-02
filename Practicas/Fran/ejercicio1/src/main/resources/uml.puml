@@ -1,5 +1,4 @@
 @startuml
-!theme materia-outline
 
 'Classes:
 '-------------
@@ -20,10 +19,18 @@ class Tweet {
 - texto: String
 }
 
+class Retweet{
+}
+
+interface Post{
+}
+
 'Associations:
 '-------------
 
 "Twitter" "0" --> "*" "Usuario" :usuarios
-"Usuario" "0" --> "*" "Tweet" :tweets
-"Tweet" "0" --> "1" "Tweet" :retweet
+"Usuario" "0" --> "*" "Post" :posts
+"Post" <|..  "Tweet"
+"Post" <|..  "Retweet"
+"Retweet" "0" --> "1" "Post" :retweet
 @enduml

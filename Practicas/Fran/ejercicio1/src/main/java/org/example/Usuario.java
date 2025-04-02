@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Usuario {
     private String screenName;
-    private List<Tweet> tweets;
+    private List<Post> posts;
 
     public Usuario(String screenName) {
         this.screenName = screenName;
-        this.tweets = new ArrayList<>();
+        this.posts = new ArrayList<>();
     }
 
     public String getScreenName (){
@@ -22,21 +22,12 @@ public class Usuario {
 
     public void crearTweet(String texto){
         Tweet tweet = new Tweet(texto);
-        tweets.add(tweet);
+        posts.add(tweet);
     }
 
     public void reTweetear(Tweet tweet){
-        Tweet retweet = new Tweet();
+        Retweet retweet = new Retweet();
         retweet.setReTweet(tweet);
-        tweets.add(retweet);
+        posts.add(retweet);
     }
-
-    public List<Tweet> getAlltweets(){
-        return this.tweets;
-    }
-
-    public void deleteReTweet(List<Tweet> tweetsEliminados){
-        tweets.stream().filter(t -> t.getReTweet().equals());
-    }
-
 }
