@@ -11,4 +11,5 @@ public class Tweet {
         this.originTweet = null;
         this.retweet = null;
     }
+
 }

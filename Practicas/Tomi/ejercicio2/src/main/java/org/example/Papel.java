@@ -2,22 +2,23 @@ package org.example;
 
 public class Papel extends Option {
 
-    public OptionType getType() {
-        return OptionType.PAPEL;
+    public Result fight(Option option) {
+        return option.fightPapel(this);
     }
 
-    public Result fight(Option option) {
-        switch (option.getType()) {
-            case PIEDRA -> {
-                return Result.WIN;
-            }
-            case PAPEL -> {
-                return Result.DRAW;
-            }
-            case TIJERA -> {
-                return Result.LOOSE;
-            }
-            default -> throw new IllegalStateException("Opción desconocida: " + option.getType());
-        }
+    @Override
+    public Result fightPiedra(Option option) {
+        return Result.LOOSE;
     }
+
+    @Override
+    public Result fightTijera(Option option) {
+        return Result.WIN;
+    }
+
+    @Override
+    public Result fightPapel(Option option) {
+        return Result.DRAW;
+    }
+
 }
