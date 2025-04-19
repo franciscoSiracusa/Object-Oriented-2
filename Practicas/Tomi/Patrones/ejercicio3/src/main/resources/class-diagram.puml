@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class MediaPlayer {
+    +play()
+}
+
+class Media {
+    +play()
+}
+
+class Audio extends Media {
+    +play()
+}
+class VideoFile extends Media {
+    +play()
+}
+
+class VideoStreamAdapter <<Adapter>> extends Media {
+    +play()
+}
+
+note left of VideoStreamAdapter::play
+    return videoStream.reproduce()
+end note
+
+class VideoStream <<Adaptee>> {
+    +reproduce()
+}
+
+MediaPlayer --> "media *" Media
+VideoStreamAdapter --> "videoStream" VideoStream
+
+@enduml
