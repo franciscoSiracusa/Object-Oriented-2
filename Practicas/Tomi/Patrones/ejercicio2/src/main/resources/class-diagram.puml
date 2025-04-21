@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Empleado {
+    #{abstract} getSueldoBasico(): double
+    #{abstract} getSueldoAdicional(): double
+    - getDescuento(): double
+    +{final} sueldo(): double
+}
+
+note right of Empleado::sueldo
+    return getSueldoBasico() + getSueldoAdicional() + getDescuento()
+end note
+
+abstract class EmpleadoConFamilia extends Empleado {
+    #isCasado: boolean
+    #cantHijos: int
+}
+
+class EmpleadoTemporario extends EmpleadoConFamilia {
+    -cantHorasTrabajadas: int
+}
+
+class EmpleadoPasante extends Empleado {
+    -cantExamenesRendidos: int
+}
+
+class EmpleadoPlanta extends EmpleadoConFamilia {
+    -antiguedad: int
+}
+
+@enduml

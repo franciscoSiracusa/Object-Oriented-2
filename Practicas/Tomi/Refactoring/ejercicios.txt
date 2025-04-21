@@ -1,0 +1,133 @@
+1
+
+1.1
+
+Mal olor: los nombres de los métodos no están bien. No son autoexplicativos se necesita leer los comentarios para entender que hacen.
+Refactoring: cambiar nombre de método (Rename Method)
+
+/** 
+* Retorna el límite de crédito del cliente
+*/
+public double lmtCrdt() {...
+
+------->
+
+/** 
+* Retorna el límite de crédito del cliente
+*/
+public double getLimiteDeCredito() {...
+
+/** 
+* Retorna el monto facturado al cliente desde la fecha f1 a la fecha f2
+*/
+protected double mtFcE(LocalDate f1, LocalDate f2) {...
+
+-------->
+
+/** 
+* Retorna el monto facturado al cliente desde la fecha f1 a la fecha f2
+*/
+protected double getMontoFacturadoEntre(LocalDate f1, LocalDate f2) {...
+
+/** 
+* Retorna el monto cobrado al cliente desde la fecha f1 a la fecha f2
+*/
+private double mtCbE(LocalDate f1, LocalDate f2) {...
+
+-------->
+
+/** 
+* Retorna el monto cobrado al cliente desde la fecha f1 a la fecha f2
+*/
+private double getMontoCobradoEntre(LocalDate f1, LocalDate f2) {...
+
+
+
+Mal olor: comentarios redundantes
+Refactoring: eliminar comentarios (Remove comment)
+
+
+public double getLimiteDeCredito() {...
+protected double getMontoFacturadoEntre(LocalDate f1, LocalDate f2) {...
+private double getMontoCobradoEntre(LocalDate f1, LocalDate f2) {...
+
+
+Mal olor: diferentes niveles de acceso que podrían unificarse, si no están puestos intencionalmente
+Refactoring: unificar niveles de acceso (Change Method Access Modifier)
+
+public double getLimiteDeCredito() {...
+public double getMontoFacturadoEntre(LocalDate f1, LocalDate f2) {...
+public double getMontoCobradoEntre(LocalDate f1, LocalDate f2) {...
+
+1.2
+
+Se hizo el refactoring Move Method. Es apropiado ya que había envidia de atributos por parte de la clase Persona. Estaba accediendo un atributo de la clase Proyecto para saber si la persona pertenecia a la lista. Es algo que puede hacer mucho mejor la clase Proyecto.
+
+1.3
+
+public void imprimirValores() {
+	int totalEdades = 0;
+	double promedioEdades = 0;
+	double totalSalarios = 0;
+	
+	for (Empleado empleado : personal) {
+		totalEdades = totalEdades + empleado.getEdad();
+		totalSalarios = totalSalarios + empleado.getSalario();
+	}
+	promedioEdades = totalEdades / personal.size();
+		
+	String message = String.format("El promedio de las edades es %s y el total de salarios es %s", promedioEdades, totalSalarios);
+	
+	System.out.println(message);
+}
+
+
+Yo no pude ver casi nada, dejo la sugerencia de chat gpt como para ajustar en estas cosas en futuros ejercicios.
+
+Code smells:
+
+- se están inicializando en 0 las variables locales cuando no hay necesidad.
+- se están intentando calcular varias cosas al mismo tiempo, cuando se podría delegar la responsabilidad de cada cosa a un método diferente. Es un método con demasiadas responsabilidades y viola el principio de single responsability.
+- hay una posible division por cero con la lista personal si no tiene elementos dentro. 
+- no usa streams y eso hace el código menos declarativo. Podria beneficiarse de usar streams, ser mas declarativo y menos imperativo (o sea decir que hacer, y no tanto como hacerlo)
+- hay un fuerte acoplamiento con el System.out.println(). Por que solo utiliza una manera de imprimir la información, pero podría separarse en otro método evitando tener que modificar este método en un futuro. O sea, se podría independizar la manera de imprimir la información, que tenga la libertad de cambiar como quiera. Podria en lugar de imprimirse en consola, guardarse en un archivo, mostrarse en una interfaz grafica, etc.
+
+Refactorings: 
+Extract Method para cada operación que realiza
+Replace Loop with Stream
+Introduce Guard Clause (o sea evitar la division por cero)
+Extract method o Move Method para a impresión de la info
+
+
+public void imprimirValores() {
+    if (personal.isEmpty()) {
+        System.out.println("No hay empleados en la lista.");
+        return;
+    }
+
+    double promedioEdades = calcularPromedioEdades();
+    double totalSalarios = calcularTotalSalarios();
+
+    mostrarResultados(promedioEdades, totalSalarios);
+}
+
+private double calcularPromedioEdades() {
+    return personal.stream()
+                   .mapToInt(Empleado::getEdad)
+                   .average()
+                   .orElse(0); // Evita división por cero
+}
+
+private double calcularTotalSalarios() {
+    return personal.stream()
+                   .mapToDouble(Empleado::getSalario)
+                   .sum();
+}
+
+private void mostrarResultados(double promedioEdades, double totalSalarios) {
+    String message = String.format(
+        "El promedio de las edades es %.2f y el total de salarios es %.2f", 
+        promedioEdades, totalSalarios
+    );
+    System.out.println(message);
+}
