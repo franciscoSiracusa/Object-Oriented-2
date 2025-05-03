@@ -1,0 +1,30 @@
+@startuml
+
+class ToDoItem {
+    + ToDoItem(name: String)
+
+    + start(): void
+    + togglePause(): void
+    + finish(): void
+    + workedTime(): Duration
+    + addComment(comment: String): void
+
+    + setState: void
+}
+
+abstract class State {
+    + start(): void
+    + togglePause(): void
+    + finish(): void
+    + addComment(comment: String): void
+}
+
+class Pending extends State {}
+class InProgress extends State {}
+class Paused extends State {}
+class Finished extends State {}
+
+ToDoItem --> "state" State
+State --> "toDoItem" ToDoItem
+
+@enduml
