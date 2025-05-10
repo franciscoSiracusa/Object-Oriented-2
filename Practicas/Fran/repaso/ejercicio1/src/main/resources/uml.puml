@@ -32,5 +32,5 @@ interface Post{
 "Usuario" "0" --> "*" "Post" :posts
 "Post" <|..  "Tweet"
 "Post" <|..  "Retweet"
-"Retweet" "0" --> "1" "Post" :retweet
+"Retweet" --> "1" "Post" :retweet
 @enduml

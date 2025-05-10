@@ -1,0 +1,1 @@
+1.1) Los metodos tienen nombres que no son legibles y entendibles de que accion tiene el metodo, el bad smell es nombre misteriozo y la forma de arreglarlo es Change Function Declaration, para cambiar el nombre de la funcion, teniendo en cuenta cambiar el nombre de esa funcion donde se utiliza

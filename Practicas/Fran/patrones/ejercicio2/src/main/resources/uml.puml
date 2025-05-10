@@ -1,0 +1,24 @@
+@startuml
+
+abstract Empleado{
++ sueldo()
++ calcularBasico()
++ calcularAdicional()
++ calcularDescuento()
+}
+
+class Temporario {
+}
+
+class Pasante {
+}
+
+class Planta {
+}
+
+
+Empleado <|-- Temporario
+Empleado <|-- Pasante
+Empleado <|-- Planta
+
+@enduml
