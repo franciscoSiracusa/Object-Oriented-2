@@ -1,0 +1,72 @@
+@startuml
+
+class DirectorSanguche {
+}
+
+interface SangucheBuilder {
++reset()
++setPan()
++setAderezo()
++setPrincipal()
++setAdicional()
+}
+
+class ClasicoBuilder {
++reset()
++setPan()
++setAderezo()
++setPrincipal()
++setAdicional()
++crear():Clasico
+}
+
+class VegetarianoBuilder {
++reset()
++setPan()
++setAderezo()
++setPrincipal()
++setAdicional()
++crear():Vegetariano
+}
+
+class VeganoBuilder {
++reset()
++setPan()
++setAderezo()
++setPrincipal()
++setAdicional()
++crear():Vegano
+}
+
+class SinTaccBuilder {
++reset()
++setPan()
++setAderezo()
++setPrincipal()
++setAdicional()
++crear():SinTacc
+}
+
+class Clasico {
++ send(data:String): String
+}
+
+class Vegetariano {
+}
+
+class Vegano {
+}
+
+class SinTacc {
+}
+
+DirectorSanguche ..> SangucheBuilder
+SangucheBuilder <|.. ClasicoBuilder
+SangucheBuilder <|.. VegetarianoBuilder
+SangucheBuilder <|.. VeganoBuilder
+SangucheBuilder <|.. SinTaccBuilder
+ClasicoBuilder --> Clasico : clasico
+VegetarianoBuilder --> Vegetariano : vegetariano
+VeganoBuilder --> Vegano : vegano
+SinTaccBuilder --> SinTacc : sinTacc
+@enduml

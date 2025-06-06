@@ -1,0 +1,26 @@
+@startuml
+
+class Sistema{
+}
+
+class Piedra {
+}
+
+class Papel {
+}
+
+class Tijera {
+}
+
+abstract Jugada{
++ gana()
++ pierde()
++ empata()
+}
+
+Sistema --> "2" Jugada : opciones
+Jugada <|-- Piedra
+Jugada <|-- Papel
+Jugada <|-- Tijera
+
+@enduml

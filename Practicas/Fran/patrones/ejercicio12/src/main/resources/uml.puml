@@ -1,0 +1,53 @@
+@startuml
+
+'cliente'
+class FileSystem {
++ tamanoTotalOcupado(): integer
++ archivoMasGrande(): Archivo
++ archivoMasNuevo(): Archivo
++ buscar(nombre: String): FileTree
++ buscarTodos(String nombre): FileTree[]
+}
+
+'hoja'
+class Archivo {
+- nombre: String
+- fechaCreacion: integer
+- tamaño: integer
++ tamanoTotalOcupado(): integer
++ archivoMasGrande(): Archivo
++ archivoMasNuevo(): Archivo
++ buscar(nombre: String): FileTree
++ buscarTodos(nombre: String): FileTree[]
+}
+
+'composite'
+class Directorio {
+- nombre: String
+- fechaCreacion: integer
++ agregar(fileTree:FileTree)
++ eliminar(fileTree:FileTree)
++ getHijo(): FileTree[]
++ tamanoTotalOcupado(): integer
++ archivoMasGrande(): Archivo
++ archivoMasNuevo(): Archivo
++ buscar(nombre: String): FileTree
++ buscarTodos(String nombre): FileTree[]
+}
+
+'componente'
+interface FileTree {
++ tamanoTotalOcupado(): integer
++ archivoMasGrande(): Archivo
++ archivoMasNuevo(): Archivo
++ buscar(nombre: String): FileTree
++ buscarTodos(String nombre): FileTree[]
+}
+
+FileSystem --> FileTree
+FileTree <|.. Archivo
+FileTree <|.. Directorio
+Directorio o-- FileTree : contenido
+
+
+@enduml
