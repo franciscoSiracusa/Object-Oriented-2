@@ -1,0 +1,46 @@
+@startuml
+
+class SubteWay
+
+class SandwichBuilder {
+    -sandwich: Sandwich
+
+    +reset(): void
+    +setPan(str: String): SandwichBuilder
+    +setPrecioPan(price: double): SandwichBuilder
+    +setAderezo(str: String): SandwichBuilder
+    +setPrecioAderezo(price: double): SandwichBuilder
+    +setPrincipal(str: String): SandwichBuilder
+    +setPrecioPrincipal(price: double): SandwichBuilder
+    +setAdicional(str: String): SandwichBuilder
+    +setPrecioAdicional(price: double): SandwichBuilder
+
+    +getResult(): Sandwich
+}
+
+class Sandwich {
+    -pan: String
+    -precioPan: double
+    -aderezo: String
+    -precioAderezo: double
+    -principal: String
+    -precioPrincipal: double
+    -adicional: String
+    -precioAdicional: double
+}
+
+class SandwichDirector {
+
+    +createClassicSandwhich(builder: SandwichBuilder): void
+    +createVegetarianSandwhich(builder: SandwichBuilder): void
+    +createVeganSandwhich(builder: SandwichBuilder): void
+    +createTACCFreeSandwhich(builder: SandwichBuilder): void
+}
+
+SandwichBuilder --> Sandwich
+SubteWay ..> SandwichDirector
+SubteWay ..> SandwichBuilder
+SandwichDirector ..> SandwichBuilder
+
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+class NotificationSender <<target>> {
+    +sendNotification(userId: String, message: String): void
+}
+
+class ExternalMessageServiceAdapter <<adapter>> extends NotificationSender {
+    +sendNotification(userId: String, message: String): void
+}
+
+class ExternalMessageService <<adaptee>> {
+    +push(destinationPhone: String, text: String): void
+}
+
+ExternalMessageServiceAdapter o-- ExternalMessageService
+
+@enduml

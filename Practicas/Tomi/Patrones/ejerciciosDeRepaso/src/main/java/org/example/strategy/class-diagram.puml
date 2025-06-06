@@ -1,0 +1,28 @@
+@startuml
+
+interface Compresor <<strategy>> {
+    comprimir(): void
+}
+
+class Zip <<contreteStrategy>> implements Compresor{
+                                  comprimir(): void
+                              }
+class Rar <<contreteStrategy>> implements Compresor{
+                                  comprimir(): void
+                              }
+class 7z <<contreteStrategy>> implements Compresor{
+                                 comprimir(): void
+                             }
+
+class Client <<context>> {
+    +setCompresor(compresor: Compresor): void
+    +comprimir(): void
+}
+
+note left of Client::comprimir
+    compresor.comprimir()
+end note
+
+Client "compresor" --> Compresor
+
+@enduml

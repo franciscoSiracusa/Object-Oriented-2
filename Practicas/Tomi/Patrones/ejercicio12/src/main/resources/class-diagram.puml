@@ -1,0 +1,26 @@
+@startuml
+
+class FileSystem {
+
+    +tamanoTotalOcupado(): int
+    +archivoMasGrande(): File
+    +archivoMasNuevo(): File
+    +buscar(nombre: String): FileSystemComponent
+    +buscarTodos(nombre: String): List<FileSystemComponent>
+    +listadoDeContenido(): String
+}
+
+interface FileSystemComponent {}
+
+class Directory implements FileSystemComponent {}
+
+class File implements FileSystemComponent {
+    -name: String
+    -creationDate: LocalDate
+    -size: int
+}
+
+FileSystem --> FileSystemComponent: root
+Directory "0..*" o-- FileSystemComponent: children
+
+@enduml
