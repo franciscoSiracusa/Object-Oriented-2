@@ -1,0 +1,40 @@
+@startuml
+
+'componente'
+interface Topografia {
++ calcularProporcionAgua():Integer
++ calcularProporcionTierra():Integer
++ equalsTopologias(): boolean
+}
+
+'hoja'
+class Agua {
++ calcularProporcionAgua():Integer
++ calcularProporcionTierra():Integer
++ equalsTopologias(): boolean
+}
+
+'hoja'
+class Tierra {
++ calcularProporcionAgua():Integer
++ calcularProporcionTierra():Integer
++ equalsTopologias(): boolean
+}
+
+'composite'
+class Mixta {
+- topologias: Topografia[]
++ add(t:Topografia)
++ remove(t:Topografia)
++ getTopologias(): Topologias[]
++ calcularProporcionAgua():Integer
++ calcularProporcionTierra():Integer
++ equalsTopologias(): boolean
+}
+
+Topografia <|.. Agua
+Topografia <|.. Tierra
+Topografia <|.. Mixta
+Mixta o-- Topografia
+
+@enduml

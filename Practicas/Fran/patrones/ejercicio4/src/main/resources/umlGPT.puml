@@ -1,0 +1,45 @@
+@startuml
+'----------------------------
+' Contexto
+'----------------------------
+class ToDoItem {
+  - name: String
+  - comments: List<String>
+  - startTime: Instant
+  - finishTime: Instant
+  - currentState: State
+  + ToDoItem(name: String)
+  + start(): void
+  + togglePause(): void
+  + finish(): void
+  + workedTime(): Duration
+  + addComment(comment: String): void
+}
+
+'----------------------------
+' Interfaz State
+'----------------------------
+interface State {
+  + start(context: ToDoItem): void
+  + togglePause(context: ToDoItem): void
+  + finish(context: ToDoItem): void
+  + addComment(context: ToDoItem, comment: String): void
+}
+
+'----------------------------
+' Estados concretos
+'----------------------------
+class PendingState
+class InProgressState
+class PausedState
+class FinishedState
+
+'----------------------------
+' Relaciones
+'----------------------------
+ToDoItem o-- State : currentState
+State <|-- PendingState
+State <|-- InProgressState
+State <|-- PausedState
+State <|-- FinishedState
+@enduml

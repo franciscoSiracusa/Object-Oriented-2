@@ -1,0 +1,41 @@
+@startuml
+
+class ToDoItem {
+- name: String
++ start()
++ togglePause()
++ finish()
++ workedTime(): Duration
++ addComment(comment:String)
+}
+
+interface State{
++ start()
++ togglePause()
++ finish()
++ addComment(comment:String)
+}
+
+class PendingState {
+}
+
+class InProgressState {
+}
+
+class PausedState {
+}
+
+class FinishedState {
+}
+
+ToDoItem --> State : state
+State <|.. PendingState
+State <|.. InProgressState
+State <|.. PausedState
+State <|.. FinishedState
+PendingState --> ToDoItem
+InProgressState --> ToDoItem
+PausedState --> ToDoItem
+FinishedState --> ToDoItem
+
+@enduml

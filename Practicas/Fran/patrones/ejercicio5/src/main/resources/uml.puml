@@ -1,0 +1,38 @@
+@startuml
+
+class Pelicula {
+- título: String
+- año: integer
+- puntaje : real
+- reproducida : boolean
+}
+
+class Decodificador {
++ sugerirTres(): recomendadas
++ setStrategy(strategy)
+}
+
+interface RecomendarStrategy{
++ sugerirTres(peliculas): recomendadas
+}
+
+class NovedadStrategy {
++ sugerirTres(peliculas): recomendadas
+}
+
+class SimilaridadStrategy {
++ sugerirTres(peliculas): recomendadas
+}
+
+class PuntajeStrategy {
++ sugerirTres(peliculas): recomendadas
+}
+
+Pelicula "1" --> "*" Pelicula : similares
+Decodificador "1" --> "*" Pelicula : peliculas
+Decodificador --> RecomendarStrategy : strategy
+RecomendarStrategy <|.. NovedadStrategy
+RecomendarStrategy <|.. SimilaridadStrategy
+RecomendarStrategy <|.. PuntajeStrategy
+
+@enduml

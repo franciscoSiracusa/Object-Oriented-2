@@ -1,0 +1,36 @@
+@startuml
+
+'Classes:
+'-------------
+
+class Twitter {
++ agregarUsuario()
++ eliminarUsuario()
+}
+
+class Usuario {
+- screenName: String
++ crearTweet()
++ hacerRetweet()
+- eliminarMisTweets()
+}
+
+class Tweet {
+- texto: String
+}
+
+class Retweet{
+}
+
+interface Post{
+}
+
+'Associations:
+'-------------
+
+"Twitter" "0" --> "*" "Usuario" :usuarios
+"Usuario" "0" --> "*" "Post" :posts
+"Post" <|..  "Tweet"
+"Post" <|..  "Retweet"
+"Retweet" --> "1" "Post" :retweet
+@enduml
