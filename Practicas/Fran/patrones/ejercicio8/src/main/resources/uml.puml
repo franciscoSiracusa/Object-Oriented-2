@@ -1,0 +1,58 @@
+@startuml
+
+class Dispositivo {
++ send(data:String): String
+}
+
+class Ringer {
++ ring(): void
+}
+
+class Display {
++ showBanner(img:String):String
+}
+
+interface CRCStrategy {
++ crcFor(data:String): integer
+}
+
+class CRC16_Calculator {
++ crcFor(data:String): integer
+}
+
+class CRC32_Calculator {
++ crcFor(data:String): integer
+}
+
+interface Connection {
++ sendData(data:String,crc:integer): String
++ pict(): String
+}
+
+class WifiConn {
+- pict: String
++ sendData(data:String,crc:integer): String
++ pict(): String
+}
+
+class FourGConnection {
+-symb: String
++ transmit(data:String,crc:integer): String
+}
+
+class FourGConnectionAdapter {
++ sendData(data:String,crc:integer): String
++ pict(): String
+}
+
+Dispositivo --> Ringer : ringer
+Dispositivo --> Display : display
+Dispositivo --> CRCStrategy : crcCalculator
+CRCStrategy <|.. CRC16_Calculator
+CRCStrategy <|.. CRC32_Calculator
+Dispositivo --> Connection : connection
+Connection <|.. WifiConn
+Connection <|.. FourGConnectionAdapter
+FourGConnectionAdapter --> FourGConnection : adaptee
+
+@enduml
